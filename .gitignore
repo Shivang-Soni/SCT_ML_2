@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.env
+
+# Data
+data/raw/
+data/processed/
+
+# IDE
+.vscode/
+*.swp
+
+# Model files
+*.joblib
+
+data/raw /.DS_Store
