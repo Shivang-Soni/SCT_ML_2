@@ -2,8 +2,8 @@ import logging
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-from utils import load_data, save_data, save_model, load_model
-from config import RAW_DATA_PATH, PROCESSED_DATA_PATH, MODEL_PATH, SCALER_PATH
+from .utils import load_data, save_data, save_model, load_model
+from .config import RAW_DATA_PATH, PROCESSED_DATA_PATH, MODEL_PATH, SCALER_PATH
 
 logging.basicConfig(level=logging.INFO)
 

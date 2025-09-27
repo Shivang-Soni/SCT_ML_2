@@ -1,44 +1,45 @@
-import os
+# scripts/main.py
 import logging
-from config import RAW_DATA_PATH, PROCESSED_DATA_PATH
-from model import KMeansClustering
-import seaborn as sns
-import matplotlib.pyplot as plt
 import pandas as pd
-from utils import save_data, load_data
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.decomposition import PCA
+
+# Relative imports I have
+from .config import RAW_DATA_PATH, PROCESSED_DATA_PATH
+from .model import KMeansClustering
+from .utils import load_data, save_data
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO)
 
-# Here will all the execution of the KMeans pipeline take place.
 if __name__ == "__main__":
     logging.info("Starting main pipeline.......")
 
-    # Loading the data
+    # Load data
     data = load_data(RAW_DATA_PATH)
 
-    # Creating a KMeansClusteringInstance
+    # Initialize KMeans pipeline
     pipeline = KMeansClustering(n_clusters=5, random_state=42)
 
-    # Data preprocessing
-    feature_columns = list(data.columns[1:])  # Skipping the Index
+    # Preprocess data (all columns except index)
+    feature_columns = list(data.columns[1:])
     preprocessed_data = pipeline.preprocess_data(data, feature_columns)
 
-    # Training my model
+    # Train model
     pipeline.train_model()
 
-    # Adding clustering labels
+    # Add cluster labels
     clustered_data = pipeline.add_clusters(data)
 
-    # Saving the data
+    # Save processed data
     save_data(clustered_data, PROCESSED_DATA_PATH)
 
-    # Model and Scaler also being saved as well
+    # Save model and scaler
     pipeline.save_pipeline()
 
-    # PCA 2D Visualization
-    if len(feature_columns) > 2:
+    # PCA 2D visualization if at least 2 features
+    if len(feature_columns) >= 2:
         logging.info("Reducing features to 2D for visualization with PCA...")
         pca = PCA(n_components=2)
         X_pca = pca.fit_transform(preprocessed_data)
@@ -46,7 +47,7 @@ if __name__ == "__main__":
         clustered_data_pca = pd.DataFrame(X_pca, columns=["PC1", "PC2"])
         clustered_data_pca["Cluster"] = clustered_data["Cluster"]
 
-        plt.figure(figsize=(8,6))
+        plt.figure(figsize=(8, 6))
         sns.scatterplot(
             x="PC1",
             y="PC2",

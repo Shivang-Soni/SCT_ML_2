@@ -1,7 +1,13 @@
 import os
+import sys
 import unittest
-from utils import save_model, load_model
-from config import MODEL_TEST_PATH
+
+# Add project root to sys.path so 'scripts' package is recognized
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
+from scripts.utils import save_model, load_model
+from scripts.config import MODEL_TEST_PATH
 
 
 class TestModel(unittest.TestCase):

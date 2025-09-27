@@ -14,3 +14,7 @@ RANDOM_SEED = int(os.getenv("RANDOM_SEED", 42))
 TEST_SIZE = float(os.getenv("TEST_SIZE", 0.2))
 N_CLUSTERS = int(os.getenv("N_CLUSTERS", 5))
 LOG_PATH = os.getenv("LOG_PATH", "logs/app.log")
+SCALER_PATH = os.getenv("SCALER_PATH", "./model/scaler.pkl")
+# Test-specific paths (local to tests)
+RAW_TEST_PATH = "data/test/raw_test.csv"
+MODEL_TEST_PATH = "data/test/model_test.pkl"

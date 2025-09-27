@@ -5,3 +5,4 @@ matplotlib
 seaborn
 Pillow
 pytest # Optional: for testing purposes
+python-dotenv

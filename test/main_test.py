@@ -2,9 +2,13 @@
 import unittest
 import os 
 import pandas as pd
-from model import KMeansClustering
-from utils import save_data, load_data
-from config import RAW_DATA_PATH, PROCESSED_DATA_PATH
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from scripts.model import KMeansClustering
+from scripts.utils import save_data, load_data
+from scripts.config import RAW_DATA_PATH, PROCESSED_DATA_PATH
 
 class KMeansTestingPipeline(unittest.TestCase):
 
